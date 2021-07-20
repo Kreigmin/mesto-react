@@ -2,7 +2,7 @@ import React from "react";
 import pen from "../images/pen.svg";
 import "../index.css";
 
-function Main() {
+function Main(props) {
   return (
     <main className="main">
       <section className="profile">
@@ -12,6 +12,7 @@ function Main() {
               className="profile__change-avatar-btn"
               type="button"
               aria-label="Изменить аватар"
+              onClick={props.onEditAvatar}
             >
               <img
                 className="profile__avatar-pen"
@@ -26,6 +27,7 @@ function Main() {
               className="profile__edit-btn"
               type="button"
               aria-label="Редактировать"
+              onClick={props.onEditProfile}
             ></button>
             <p className="profile__job"></p>
           </div>
@@ -34,6 +36,7 @@ function Main() {
           className="profile__add-btn"
           type="button"
           aria-label="Добавить"
+          onClick={props.onAddPlace}
         ></button>
       </section>
       <section className="cards">

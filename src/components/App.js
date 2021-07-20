@@ -8,17 +8,37 @@ import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  }
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
 
   return (
     <>
       <div className="page">
         <Header />
-        <Main />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+        />
         <Footer />
       </div>
       <PopupWithForm
@@ -28,6 +48,7 @@ function App() {
         marginSize="large"
         btnName="Сохранить"
         isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <div className="form__field">
@@ -70,6 +91,7 @@ function App() {
         marginSize="large"
         btnName="Создать"
         isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <div className="form__field">
@@ -119,6 +141,7 @@ function App() {
         marginSize="large"
         btnName="Сохранить"
         isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
         children={
           <>
             <div className="form__field">

@@ -2,16 +2,18 @@ import React from "react";
 import "../index.css";
 
 function PopupWithForm(props) {
-  console.log(props.children);
   return (
     <div
-      className={`popup popup_type_${props.name} popup_bg-alfa_${props.color}`}
+      className={`popup popup_type_${props.name} popup_bg-alfa_${props.color} ${
+        props.isOpen ? "popup_opened" : ""
+      }`}
     >
       <div className="popup__container">
         <button
           className="close-btn close-edit-popup popup__close"
           type="button"
           aria-label="Закрыть"
+          onClick={props.onClose}
         ></button>
         <form className="form profileChangeForm" name={props.name} noValidate>
           <h2 className="form__title">{props.title}</h2>
