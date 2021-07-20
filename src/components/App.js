@@ -161,25 +161,6 @@ function App() {
         }
       />
       <ImagePopup />
-
-      {/* <template className="card-template">
-        <li className="card">
-          <button className="card__full-img-btn">
-            <img className="card__image" src="#" alt="" />
-          </button>
-          <div className="card__footer">
-            <h2 className="card__title"></h2>
-            <div className="card__like-container">
-              <button
-                className="card__like"
-                type="button"
-                aria-label="Нравится"
-              ></button>
-              <p className="card__like-number"></p>
-            </div>
-          </div>
-        </li>
-      </template> */}
     </>
   );
 }

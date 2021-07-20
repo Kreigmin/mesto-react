@@ -7,12 +7,19 @@ function Main(props) {
   const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo().then((data) => {
       setUserName(data.name);
       setUserDescription(data.about);
       setUserAvatar(data.avatar);
+    });
+  }, []);
+
+  useEffect(() => {
+    api.getCards().then((data) => {
+      setCards(data);
     });
   }, []);
 
@@ -56,7 +63,28 @@ function Main(props) {
         ></button>
       </section>
       <section className="cards">
-        <ul className="cards__list"></ul>
+        <ul className="cards__list">
+          {cards.map((card) => {
+            return (
+              <li className="card" key={card._id}>
+                <button className="card__full-img-btn">
+                  <img className="card__image" src={card.link} alt="" />
+                </button>
+                <div className="card__footer">
+                  <h2 className="card__title">{card.name}</h2>
+                  <div className="card__like-container">
+                    <button
+                      className="card__like"
+                      type="button"
+                      aria-label="Нравится"
+                    ></button>
+                    <p className="card__like-number">{card.likes.length}</p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </section>
     </main>
   );
