@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import pen from "../images/pen.svg";
+import api from "../utils/Api.js";
 import "../index.css";
 
 function Main(props) {
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+
+  useEffect(() => {
+    api.getUserInfo().then((data) => {
+      setUserName(data.name);
+      setUserDescription(data.about);
+      setUserAvatar(data.avatar);
+    });
+  }, []);
+
   return (
     <main className="main">
       <section className="profile">
         <div className="profile__info">
-          <div className="profile__avatar">
+          <div
+            className="profile__avatar"
+            style={{ backgroundImage: `url(${userAvatar})` }}
+          >
             <button
               className="profile__change-avatar-btn"
               type="button"
@@ -22,14 +38,14 @@ function Main(props) {
             </button>
           </div>
           <div className="profile__text">
-            <h1 className="profile__name"></h1>
+            <h1 className="profile__name">{userName}</h1>
             <button
               className="profile__edit-btn"
               type="button"
               aria-label="Редактировать"
               onClick={props.onEditProfile}
             ></button>
-            <p className="profile__job"></p>
+            <p className="profile__job">{userDescription}</p>
           </div>
         </div>
         <button

@@ -162,7 +162,7 @@ function App() {
       />
       <ImagePopup />
 
-      <template className="card-template">
+      {/* <template className="card-template">
         <li className="card">
           <button className="card__full-img-btn">
             <img className="card__image" src="#" alt="" />
@@ -179,7 +179,7 @@ function App() {
             </div>
           </div>
         </li>
-      </template>
+      </template> */}
     </>
   );
 }
