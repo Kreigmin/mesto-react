@@ -11,17 +11,27 @@ function Main(props) {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getUserInfo().then((data) => {
-      setUserName(data.name);
-      setUserDescription(data.about);
-      setUserAvatar(data.avatar);
-    });
+    api
+      .getUserInfo()
+      .then((data) => {
+        setUserName(data.name);
+        setUserDescription(data.about);
+        setUserAvatar(data.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
-    api.getCards().then((data) => {
-      setCards(data);
-    });
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
@@ -68,15 +78,6 @@ function Main(props) {
           {cards.map((card) => (
             <Card card={card} key={card._id} onCardClick={props.onCardClick} />
           ))}
-          {/* {cards.map((card) => {
-            return (
-              <Card
-                card={card}
-                key={card._id}
-                onCardClick={props.onCardClick}
-              />
-            );
-          })} */}
         </ul>
       </section>
     </main>
