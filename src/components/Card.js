@@ -25,7 +25,7 @@ function Card(props) {
       <button
         className="card__delete-btn"
         type="button"
-        ariaLabel="Удалить"
+        aria-label="Удалить"
       ></button>
     </li>
   );

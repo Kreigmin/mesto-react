@@ -70,6 +70,7 @@ function App() {
                 minLength="2"
                 maxLength="40"
                 required
+                readOnly
               />
               <span className="form__input-error name-input-error"></span>
             </div>
@@ -85,6 +86,7 @@ function App() {
                 minLength="2"
                 maxLength="200"
                 required
+                readOnly
               />
               <span className="form__input-error about-me-input-error"></span>
             </div>
@@ -113,6 +115,7 @@ function App() {
                 minLength="2"
                 maxLength="30"
                 required
+                readOnly
               />
               <span className="form__input-error card-name-input-error"></span>
             </div>
@@ -126,6 +129,7 @@ function App() {
                 autoComplete="off"
                 placeholder="Ссылка на картинку"
                 required
+                readOnly
               />
               <span className="form__input-error card-link-input-error"></span>
             </div>
@@ -161,6 +165,7 @@ function App() {
                 autoComplete="off"
                 placeholder="Ссылка на аватар"
                 required
+                readOnly
               />
               <span className="form__input-error avatar-link-input-error"></span>
             </div>
