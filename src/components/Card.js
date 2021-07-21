@@ -2,9 +2,13 @@ import React from "react";
 import "../index.css";
 
 function Card(props) {
+  function handleClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
-    <li className="card" key={props.card._id}>
-      <button className="card__full-img-btn">
+    <li className="card">
+      <button className="card__full-img-btn" onClick={handleClick}>
         <img className="card__image" src={props.card.link} alt="" />
       </button>
       <div className="card__footer">
@@ -18,6 +22,11 @@ function Card(props) {
           <p className="card__like-number">{props.card.likes.length}</p>
         </div>
       </div>
+      <button
+        className="card__delete-btn"
+        type="button"
+        ariaLabel="Удалить"
+      ></button>
     </li>
   );
 }
