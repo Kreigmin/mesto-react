@@ -15,7 +15,7 @@ function PopupWithForm(props) {
           aria-label="Закрыть"
           onClick={props.onClose}
         ></button>
-        <form className="form profileChangeForm" name={props.name} noValidate>
+        <form className="form" name={props.name}>
           <h2 className="form__title">{props.title}</h2>
           {props.children}
           <fieldset className="form__fieldset">
