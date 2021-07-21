@@ -5,7 +5,7 @@ function ImagePopup(props) {
   return (
     <div
       className={`popup popup_bg-alfa_black popup_type_image ${
-        props.card[0] ? "popup_opened" : ""
+        props.card.link ? "popup_opened" : ""
       }`}
     >
       <figure className="image-popup">
@@ -17,10 +17,12 @@ function ImagePopup(props) {
         ></button>
         <img
           className="image-popup__full-img"
-          src={props.card[0] ? props.card[1].link : "#"}
-          alt="#"
+          src={props.card ? props.card.link : "#"}
+          alt={props.card ? props.card.name : ""}
         />
-        <figcaption className="image-popup__caption"></figcaption>
+        <figcaption className="image-popup__caption">
+          {props.card ? props.card.name : ""}
+        </figcaption>
       </figure>
     </div>
   );

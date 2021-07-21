@@ -11,7 +11,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState([false]);
+  const [selectedCard, setSelectedCard] = useState({ name: "", link: "" });
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -26,14 +26,14 @@ function App() {
   }
 
   function handleCardClick(card) {
-    setSelectedCard([true, card]);
+    setSelectedCard({ name: card.name, link: card.link });
   }
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({ name: "", link: "" });
   }
 
   return (
@@ -56,43 +56,41 @@ function App() {
         btnName="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
-        children={
-          <>
-            <div className="form__field">
-              <input
-                type="text"
-                className="form__input form__input_name_value"
-                id="name-input"
-                name="profileName"
-                value=""
-                autoComplete="off"
-                placeholder="Имя"
-                minLength="2"
-                maxLength="40"
-                required
-                readOnly
-              />
-              <span className="form__input-error name-input-error"></span>
-            </div>
-            <div className="form__field">
-              <input
-                type="text"
-                className="form__input form__input_job_value"
-                id="about-me-input"
-                name="profileJob"
-                value=""
-                autoComplete="off"
-                placeholder="О себе"
-                minLength="2"
-                maxLength="200"
-                required
-                readOnly
-              />
-              <span className="form__input-error about-me-input-error"></span>
-            </div>
-          </>
-        }
-      />
+      >
+        <div className="form__field">
+          <input
+            type="text"
+            className="form__input form__input_name_value"
+            id="name-input"
+            name="profileName"
+            value=""
+            autoComplete="off"
+            placeholder="Имя"
+            minLength="2"
+            maxLength="40"
+            required
+            readOnly
+          />
+          <span className="form__input-error name-input-error"></span>
+        </div>
+        <div className="form__field">
+          <input
+            type="text"
+            className="form__input form__input_job_value"
+            id="about-me-input"
+            name="profileJob"
+            value=""
+            autoComplete="off"
+            placeholder="О себе"
+            minLength="2"
+            maxLength="200"
+            required
+            readOnly
+          />
+          <span className="form__input-error about-me-input-error"></span>
+        </div>
+      </PopupWithForm>
+
       <PopupWithForm
         name="add_card"
         color="dark"
@@ -101,42 +99,38 @@ function App() {
         btnName="Создать"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
-        children={
-          <>
-            <div className="form__field">
-              <input
-                type="text"
-                className="form__input form__input_card-name_value"
-                id="card-name-input"
-                name="cardName"
-                value=""
-                autoComplete="off"
-                placeholder="Название"
-                minLength="2"
-                maxLength="30"
-                required
-                readOnly
-              />
-              <span className="form__input-error card-name-input-error"></span>
-            </div>
-            <div className="form__field">
-              <input
-                type="url"
-                className="form__input form__input_card-link_value"
-                id="card-link-input"
-                name="cardImage"
-                value=""
-                autoComplete="off"
-                placeholder="Ссылка на картинку"
-                required
-                readOnly
-              />
-              <span className="form__input-error card-link-input-error"></span>
-            </div>
-          </>
-        }
-      />
-
+      >
+        <div className="form__field">
+          <input
+            type="text"
+            className="form__input form__input_card-name_value"
+            id="card-name-input"
+            name="cardName"
+            value=""
+            autoComplete="off"
+            placeholder="Название"
+            minLength="2"
+            maxLength="30"
+            required
+            readOnly
+          />
+          <span className="form__input-error card-name-input-error"></span>
+        </div>
+        <div className="form__field">
+          <input
+            type="url"
+            className="form__input form__input_card-link_value"
+            id="card-link-input"
+            name="cardImage"
+            value=""
+            autoComplete="off"
+            placeholder="Ссылка на картинку"
+            required
+            readOnly
+          />
+          <span className="form__input-error card-link-input-error"></span>
+        </div>
+      </PopupWithForm>
       <PopupWithForm
         name="delete_card"
         color="dark"
@@ -153,25 +147,23 @@ function App() {
         btnName="Сохранить"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        children={
-          <>
-            <div className="form__field">
-              <input
-                type="url"
-                className="form__input form__input_card-link_value"
-                id="avatar-link-input"
-                name="avatarImage"
-                value=""
-                autoComplete="off"
-                placeholder="Ссылка на аватар"
-                required
-                readOnly
-              />
-              <span className="form__input-error avatar-link-input-error"></span>
-            </div>
-          </>
-        }
-      />
+      >
+        <div className="form__field">
+          <input
+            type="url"
+            className="form__input form__input_card-link_value"
+            id="avatar-link-input"
+            name="avatarImage"
+            value=""
+            autoComplete="off"
+            placeholder="Ссылка на аватар"
+            required
+            readOnly
+          />
+          <span className="form__input-error avatar-link-input-error"></span>
+        </div>
+      </PopupWithForm>
+
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </>
   );
