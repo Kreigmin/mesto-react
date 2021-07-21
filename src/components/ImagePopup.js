@@ -17,11 +17,11 @@ function ImagePopup(props) {
         ></button>
         <img
           className="image-popup__full-img"
-          src={props.card ? props.card.link : "#"}
-          alt={props.card ? props.card.name : ""}
+          src={props.card.link ? props.card.link : "#"}
+          alt={props.card.name ? props.card.name : ""}
         />
         <figcaption className="image-popup__caption">
-          {props.card ? props.card.name : ""}
+          {props.card.name ? props.card.name : ""}
         </figcaption>
       </figure>
     </div>
