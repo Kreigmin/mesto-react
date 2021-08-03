@@ -60,6 +60,8 @@
 @import url(./blocks/card/__like-number/card__like-number.css);
 @import url(./blocks/card/__delete-btn/card__delete-btn.css);
 @import url(./blocks/card/__full-img-btn/card__full-img-btn.css);
+@import url(./blocks/card/__delete-btn/_state/card__delete-btn_state_hidden.css);
+@import url(./blocks/card/__delete-btn/_state/card__delete-btn_state_visible.css);
 
 /* styles for footer */
 @import url(./blocks/footer/footer.css);

@@ -10,10 +10,9 @@
   background-color: transparent;
   border: none;
   outline: none;
-  opacity: 1;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .card__delete-btn:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
