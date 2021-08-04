@@ -8,6 +8,7 @@ import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 import api from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
+import EditProfilePopup from "./EditProfilePopup.js";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -50,6 +51,18 @@ function App() {
     setSelectedCard({ name: "", link: "" });
   }
 
+  function handleUpdateUser(info) {
+    api
+      .sendProfileDataToServer(info.name, info.about)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -59,51 +72,15 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
+          onUpdateUser={handleUpdateUser}
         />
         <Footer />
       </div>
-      <PopupWithForm
-        name="edit_profile"
-        color="dark"
-        title="Редактировать профиль"
-        marginSize="large"
-        btnName="Сохранить"
+      <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
-      >
-        <div className="form__field">
-          <input
-            type="text"
-            className="form__input form__input_name_value"
-            id="name-input"
-            name="profileName"
-            value=""
-            autoComplete="off"
-            placeholder="Имя"
-            minLength="2"
-            maxLength="40"
-            required
-            readOnly
-          />
-          <span className="form__input-error name-input-error"></span>
-        </div>
-        <div className="form__field">
-          <input
-            type="text"
-            className="form__input form__input_job_value"
-            id="about-me-input"
-            name="profileJob"
-            value=""
-            autoComplete="off"
-            placeholder="О себе"
-            minLength="2"
-            maxLength="200"
-            required
-            readOnly
-          />
-          <span className="form__input-error about-me-input-error"></span>
-        </div>
-      </PopupWithForm>
+        onUpdateUser={handleUpdateUser}
+      />
 
       <PopupWithForm
         name="add_card"
