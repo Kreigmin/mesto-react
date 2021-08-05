@@ -42,17 +42,49 @@ function App() {
       });
   }, []);
 
+  // function handleCardLike(card) {
+  //   const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  //   api.sendLikeToServer(card._id, !isLiked, card.likes).then((newCard) => {
+  //
+  //   });
+  // }
+  // function handleCardLike(card) {
+  //   const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  //   api
+  //     .changeLikeCardStatus(card._id, card.likes, !isLiked)
+  //     .then((newCard) => {
+  //       setCards((state) =>
+  //         state.map((c) => (c._id === card._id ? newCard : c))
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    api.sendLikeToServer(card._id, !isLiked, card.likes).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .changeLikeCardStatus(card._id, card.likes, !isLiked)
+      .then((newCard) => {
+        const newCards = cards.map((item) =>
+          item._id === card._id ? newCard : item
+        );
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id));
-    });
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleEditAvatarClick() {
