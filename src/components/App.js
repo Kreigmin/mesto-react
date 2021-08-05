@@ -102,6 +102,18 @@ function App() {
       });
   }
 
+  function handleAddPlaceSubmit(info) {
+    api
+      .addNewCardToServer(info.name, info.link)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -124,7 +136,11 @@ function App() {
         onUpdateUser={handleUpdateUser}
       />
 
-      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+      <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onAddPlace={handleAddPlaceSubmit}
+      />
 
       <PopupWithForm
         name="delete_card"
