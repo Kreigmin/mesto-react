@@ -10,6 +10,7 @@ import api from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
+import AddPlacePopup from "./AddPlacePopup.js";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -123,46 +124,8 @@ function App() {
         onUpdateUser={handleUpdateUser}
       />
 
-      <PopupWithForm
-        name="add_card"
-        color="dark"
-        title="Новое место"
-        marginSize="large"
-        btnName="Создать"
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-      >
-        <div className="form__field">
-          <input
-            type="text"
-            className="form__input form__input_card-name_value"
-            id="card-name-input"
-            name="cardName"
-            value=""
-            autoComplete="off"
-            placeholder="Название"
-            minLength="2"
-            maxLength="30"
-            required
-            readOnly
-          />
-          <span className="form__input-error card-name-input-error"></span>
-        </div>
-        <div className="form__field">
-          <input
-            type="url"
-            className="form__input form__input_card-link_value"
-            id="card-link-input"
-            name="cardImage"
-            value=""
-            autoComplete="off"
-            placeholder="Ссылка на картинку"
-            required
-            readOnly
-          />
-          <span className="form__input-error card-link-input-error"></span>
-        </div>
-      </PopupWithForm>
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+
       <PopupWithForm
         name="delete_card"
         color="dark"
