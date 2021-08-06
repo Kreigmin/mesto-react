@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
 import "../index.css";
 import api from "../utils/Api.js";
 import Header from "./Header.js";
@@ -162,24 +161,22 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      {/* пытался сделать для лого Route и Link, но при попытке сдать работу выдавало ошибку,
+       что react-router-dom модуль не найден, поэтому убрал его */}
       <div className="page">
-        <BrowserRouter>
-          <Header />
-          <Route exact path="/">
-            <Main
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              onUpdateUser={handleUpdateUser}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onDeleteCardClick={handleDeleteCardClick}
-              onCurrentCard={handleCurrentCard}
-            />
-            <Footer />
-          </Route>
-        </BrowserRouter>
+        <Header />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          onUpdateUser={handleUpdateUser}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onDeleteCardClick={handleDeleteCardClick}
+          onCurrentCard={handleCurrentCard}
+        />
+        <Footer />
       </div>
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
