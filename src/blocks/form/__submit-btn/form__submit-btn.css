@@ -1,0 +1,30 @@
+.form__submit-btn {
+  font-family: 'Inter', Arial, sans-serif;
+  display: block;
+  width: 83.26%;
+  border: none;
+  background-color: #000;
+  padding: 14px 125px 18px 124px;
+  border-radius: 2px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #fff;
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+  cursor: pointer;
+}
+
+.form__submit-btn:hover {
+  opacity: .8;
+}
+
+@media (max-width: 420px) {
+  .form__submit-btn {
+    width: 84.4%;
+    padding: 14px 82px;
+    font-size: 14px;
+    line-height: 1.21;
+    margin-top: 45px;
+  }
+}
