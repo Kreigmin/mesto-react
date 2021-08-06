@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
-import api from "../utils/Api.js";
+import api from "../../src/utils/Api";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
