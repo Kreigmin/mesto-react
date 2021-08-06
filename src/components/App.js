@@ -12,7 +12,7 @@ import AddPlacePopup from "./AddPlacePopup.js";
 import DeleteCardPopup from "./DeleteCardPopup.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-import api from "../utils/Api.js";
+import api from "../utils/api.js";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
