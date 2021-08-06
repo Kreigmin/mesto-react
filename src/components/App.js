@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "../index.css";
-
+import api from "../utils/Api.js";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -11,8 +11,6 @@ import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
 import DeleteCardPopup from "./DeleteCardPopup.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
-
-import api from "../utils/Api.js";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
