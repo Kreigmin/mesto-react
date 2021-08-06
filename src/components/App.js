@@ -44,12 +44,6 @@ function App() {
 
   // function handleCardLike(card) {
   //   const isLiked = card.likes.some((i) => i._id === currentUser._id);
-  //   api.sendLikeToServer(card._id, !isLiked, card.likes).then((newCard) => {
-  //
-  //   });
-  // }
-  // function handleCardLike(card) {
-  //   const isLiked = card.likes.some((i) => i._id === currentUser._id);
   //   api
   //     .changeLikeCardStatus(card._id, card.likes, !isLiked)
   //     .then((newCard) => {
@@ -66,10 +60,9 @@ function App() {
     api
       .changeLikeCardStatus(card._id, card.likes, !isLiked)
       .then((newCard) => {
-        const newCards = cards.map((item) =>
-          item._id === card._id ? newCard : item
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
         );
-        setCards(newCards);
       })
       .catch((err) => {
         console.log(err);

@@ -82,7 +82,7 @@ class Api {
       body: JSON.stringify({
         likes: likes,
       }),
-    });
+    }).then(this._checkResponse);
   }
 
   deleteLike(idCard) {
@@ -92,14 +92,14 @@ class Api {
         authorization: this._authorization,
         "Content-Type": this._contentType,
       },
-    });
+    }).then(this._checkResponse);
   }
 
   changeLikeCardStatus(cardId, likes, isLiked) {
     if (isLiked) {
-      return this.sendLikeToServer(cardId, likes).then(this._checkResponse);
+      return this.sendLikeToServer(cardId, likes);
     } else {
-      return this.deleteLike(cardId).then(this._checkResponse);
+      return this.deleteLike(cardId);
     }
   }
 
