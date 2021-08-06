@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
 import PopupWithForm from "./PopupWithForm.js";
 
@@ -17,11 +17,17 @@ function AddPlacePopup(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
+    props.onRenderLoading("Создание...");
     props.onAddPlace({
       name,
       link,
     });
   }
+
+  useEffect(() => {
+    setName("");
+    setLink("");
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm
@@ -29,7 +35,7 @@ function AddPlacePopup(props) {
       color="dark"
       title="Новое место"
       marginSize="large"
-      btnName="Создать"
+      btnName={props.buttonName}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

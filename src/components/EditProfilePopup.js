@@ -18,7 +18,7 @@ function EditProfilePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
+    props.onRenderLoading("Сохранение...");
     props.onUpdateUser({
       name,
       about: description,
@@ -28,7 +28,7 @@ function EditProfilePopup(props) {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser.name, currentUser.about]);
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm
@@ -36,7 +36,7 @@ function EditProfilePopup(props) {
       color="dark"
       title="Редактировать профиль"
       marginSize="large"
-      btnName="Сохранить"
+      btnName={props.buttonName}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

@@ -5,6 +5,8 @@ import "../index.css";
 function DeleteCardPopup(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
+
+    props.onRenderLoading("Удаление...");
     props.onDeleteCard();
   }
 
@@ -14,7 +16,7 @@ function DeleteCardPopup(props) {
       color="dark"
       title="Вы уверены?"
       marginSize="medium"
-      btnName="Да"
+      btnName={props.buttonName}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
