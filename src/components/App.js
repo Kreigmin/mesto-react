@@ -166,8 +166,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <BrowserRouter>
+          <Header />
           <Route exact path="/">
-            <Header />
             <Main
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
