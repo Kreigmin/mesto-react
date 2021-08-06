@@ -14,7 +14,8 @@ function Card(props) {
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.card);
+    props.onDeleteCardClick();
+    props.onCurrentCard(props.card);
   }
 
   const isOwn = props.card.owner._id === currentUser._id;
