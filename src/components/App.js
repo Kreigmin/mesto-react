@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { BrowserRouter, Route } from "react-router-dom";
 import "../index.css";
 
 import Header from "./Header.js";
@@ -165,19 +165,23 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          onUpdateUser={handleUpdateUser}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onDeleteCardClick={handleDeleteCardClick}
-          onCurrentCard={handleCurrentCard}
-        />
-        <Footer />
+        <BrowserRouter>
+          <Route exact path="/">
+            <Header />
+            <Main
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              onUpdateUser={handleUpdateUser}
+              cards={cards}
+              onCardLike={handleCardLike}
+              onDeleteCardClick={handleDeleteCardClick}
+              onCurrentCard={handleCurrentCard}
+            />
+            <Footer />
+          </Route>
+        </BrowserRouter>
       </div>
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
