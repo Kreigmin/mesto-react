@@ -1,6 +1,5 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
-import "../index.css";
 
 function DeleteCardPopup(props) {
   function handleSubmit(evt) {
