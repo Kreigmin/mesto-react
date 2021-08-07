@@ -47,7 +47,7 @@ function EditProfilePopup(props) {
           className="form__input form__input_name_value"
           id="name-input"
           name="profileName"
-          value={name}
+          value={name || " "}
           autoComplete="off"
           placeholder="Имя"
           minLength="2"
@@ -63,7 +63,7 @@ function EditProfilePopup(props) {
           className="form__input form__input_job_value"
           id="about-me-input"
           name="profileJob"
-          value={description}
+          value={description || ""}
           autoComplete="off"
           placeholder="О себе"
           minLength="2"
