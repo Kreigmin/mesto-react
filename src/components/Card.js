@@ -2,29 +2,35 @@ import React, { useContext } from "react";
 import "../index.css";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Card(props) {
+function Card({
+  card,
+  onCardClick,
+  onCardLike,
+  onDeleteCardClick,
+  onCurrentCard,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   function handleClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
 
   function handleLikeClick() {
-    props.onCardLike(props.card);
+    onCardLike(card);
   }
 
   function handleDeleteClick() {
-    props.onDeleteCardClick();
-    props.onCurrentCard(props.card);
+    onDeleteCardClick();
+    onCurrentCard(card);
   }
 
-  const isOwn = props.card.owner._id === currentUser._id;
+  const isOwn = card.owner._id === currentUser._id;
 
   const cardDeleteButtonClassName = `card__delete-btn ${
     isOwn ? "card__delete-btn_state_visible" : "card__delete-btn_state_hidden"
   }`;
 
-  const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
   const cardLikeButtonClassName = `card__like ${
     isLiked ? "card__like_state_active" : "card__like_state_inactive"
   }`;
@@ -32,10 +38,10 @@ function Card(props) {
   return (
     <li className="card">
       <button className="card__full-img-btn" onClick={handleClick}>
-        <img className="card__image" src={props.card.link} alt="" />
+        <img className="card__image" src={card.link} alt={card.name} />
       </button>
       <div className="card__footer">
-        <h2 className="card__title">{props.card.name}</h2>
+        <h2 className="card__title">{card.name}</h2>
         <div className="card__like-container">
           <button
             className={cardLikeButtonClassName}
@@ -43,7 +49,7 @@ function Card(props) {
             type="button"
             aria-label="Нравится"
           ></button>
-          <p className="card__like-number">{props.card.likes.length}</p>
+          <p className="card__like-number">{card.likes.length}</p>
         </div>
       </div>
       <button

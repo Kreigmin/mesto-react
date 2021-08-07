@@ -1,12 +1,18 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
-function DeleteCardPopup(props) {
+function DeleteCardPopup({
+  isOpen,
+  onClose,
+  onDeleteCard,
+  onRenderLoading,
+  isSubmitting,
+}) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    props.onRenderLoading(true);
-    props.onDeleteCard();
+    onRenderLoading(true);
+    onDeleteCard();
   }
 
   return (
@@ -15,9 +21,9 @@ function DeleteCardPopup(props) {
       color="dark"
       title="Вы уверены?"
       marginSize="medium"
-      btnName={props.isSubmitting ? "Удаление..." : "Да"}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      btnName={isSubmitting ? "Удаление..." : "Да"}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     />
   );

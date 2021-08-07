@@ -1,21 +1,27 @@
 import React, { useEffect, useRef } from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup({
+  isOpen,
+  onClose,
+  onUpdateAvatar,
+  onRenderLoading,
+  isSubmitting,
+}) {
   const avatarLinkRef = useRef();
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    props.onRenderLoading(true);
-    props.onUpdateAvatar({
+    onRenderLoading(true);
+    onUpdateAvatar({
       avatar: avatarLinkRef.current.value,
     });
   }
 
   useEffect(() => {
     avatarLinkRef.current.value = "";
-  }, [props.isOpen]);
+  }, [isOpen]);
 
   return (
     <PopupWithForm
@@ -23,9 +29,9 @@ function EditAvatarPopup(props) {
       color="dark"
       title="Обновить аватар"
       marginSize="large"
-      btnName={props.isSubmitting ? "Cохранение..." : "Сохранить"}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      btnName={isSubmitting ? "Cохранение..." : "Сохранить"}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <div className="form__field">

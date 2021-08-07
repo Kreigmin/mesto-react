@@ -1,10 +1,20 @@
 import React from "react";
 
-function PopupWithForm(props) {
+function PopupWithForm({
+  name,
+  color,
+  title,
+  marginSize,
+  btnName,
+  isOpen,
+  onClose,
+  onSubmit,
+  children,
+}) {
   return (
     <div
-      className={`popup popup_type_${props.name} popup_bg-alfa_${props.color} ${
-        props.isOpen ? "popup_opened" : ""
+      className={`popup popup_type_${name} popup_bg-alfa_${color} ${
+        isOpen ? "popup_opened" : ""
       }`}
     >
       <div className="popup__container">
@@ -12,18 +22,18 @@ function PopupWithForm(props) {
           className="close-btn close-edit-popup popup__close"
           type="button"
           aria-label="Закрыть"
-          onClick={props.onClose}
+          onClick={onClose}
         ></button>
-        <form className="form" name={props.name} onSubmit={props.onSubmit}>
-          <h2 className="form__title">{props.title}</h2>
-          {props.children}
+        <form className="form" name={name} onSubmit={onSubmit}>
+          <h2 className="form__title">{title}</h2>
+          {children}
           <fieldset className="form__fieldset">
             <button
-              className={`form__submit-btn form__submit-btn_margin_${props.marginSize}`}
+              className={`form__submit-btn form__submit-btn_margin_${marginSize}`}
               type="submit"
               aria-label="Сохранить"
             >
-              {props.btnName}
+              {btnName}
             </button>
           </fieldset>
         </form>

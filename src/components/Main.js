@@ -3,7 +3,16 @@ import pen from "../images/pen.svg";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Main(props) {
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  cards,
+  onCardLike,
+  onDeleteCardClick,
+  onCurrentCard,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -18,7 +27,7 @@ function Main(props) {
               className="profile__change-avatar-btn"
               type="button"
               aria-label="Изменить аватар"
-              onClick={props.onEditAvatar}
+              onClick={onEditAvatar}
             >
               <img
                 className="profile__avatar-pen"
@@ -33,7 +42,7 @@ function Main(props) {
               className="profile__edit-btn"
               type="button"
               aria-label="Редактировать"
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             ></button>
             <p className="profile__job">{currentUser.about}</p>
           </div>
@@ -42,19 +51,19 @@ function Main(props) {
           className="profile__add-btn"
           type="button"
           aria-label="Добавить"
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
       <section className="cards">
         <ul className="cards__list">
-          {props.cards.map((card) => (
+          {cards.map((card) => (
             <Card
               card={card}
               key={card._id}
-              onCardClick={props.onCardClick}
-              onCardLike={props.onCardLike}
-              onDeleteCardClick={props.onDeleteCardClick}
-              onCurrentCard={props.onCurrentCard}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onDeleteCardClick={onDeleteCardClick}
+              onCurrentCard={onCurrentCard}
             />
           ))}
         </ul>

@@ -158,7 +158,6 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
-          onUpdateUser={handleUpdateUser}
           cards={cards}
           onCardLike={handleCardLike}
           onDeleteCardClick={handleDeleteCardClick}
