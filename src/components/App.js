@@ -17,8 +17,8 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({ name: "", link: "" });
-  const [currentCard, setCurrentCard] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentCard, setCurrentCard] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [buttonName, setButtonName] = useState("");
 
