@@ -8,7 +8,7 @@ function EditAvatarPopup(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    props.onRenderLoading("Сохранение...");
+    props.onRenderLoading(true);
     props.onUpdateAvatar({
       avatar: avatarLinkRef.current.value,
     });
@@ -24,7 +24,7 @@ function EditAvatarPopup(props) {
       color="dark"
       title="Обновить аватар"
       marginSize="large"
-      btnName={props.buttonName}
+      btnName={props.isSubmitting ? "Cохранение..." : "Сохранить"}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

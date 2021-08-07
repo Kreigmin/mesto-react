@@ -17,7 +17,7 @@ function AddPlacePopup(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    props.onRenderLoading("Создание...");
+    props.onRenderLoading(true);
     props.onAddPlace({
       name,
       link,
@@ -35,7 +35,7 @@ function AddPlacePopup(props) {
       color="dark"
       title="Новое место"
       marginSize="large"
-      btnName={props.buttonName}
+      btnName={props.isSubmitting ? "Создание..." : "Создать"}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

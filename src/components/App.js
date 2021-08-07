@@ -20,33 +20,11 @@ function App() {
   const [currentCard, setCurrentCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [buttonName, setButtonName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function renderLoading(buttonName) {
-    setButtonName(buttonName);
+  function renderLoading(isLoading) {
+    setIsSubmitting(isLoading);
   }
-
-  // useEffect(() => {
-  //   api
-  //     .getUserInfo()
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   api
-  //     .getCards()
-  //     .then((data) => {
-  //       setCards(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   useEffect(() => {
     Promise.all([api.getCards(), api.getUserInfo()])
@@ -87,7 +65,7 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setButtonName("Удалить");
+        setIsSubmitting(false);
       });
   }
 
@@ -102,7 +80,7 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setButtonName("Сохранить");
+        setIsSubmitting(false);
       });
   }
 
@@ -117,7 +95,7 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setButtonName("Сохранить");
+        setIsSubmitting(false);
       });
   }
 
@@ -132,28 +110,24 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setButtonName("Создать");
+        setIsSubmitting(false);
       });
   }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-    setButtonName("Сохранить");
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    setButtonName("Сохранить");
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-    setButtonName("Создать");
   }
 
   function handleDeleteCardClick() {
     setIsDeleteCardPopupOpen(!isDeleteCardPopupOpen);
-    setButtonName("Да");
   }
 
   function handleCardClick(card) {
@@ -169,6 +143,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsDeleteCardPopupOpen(false);
+    setIsSubmitting(false);
     setSelectedCard({ name: "", link: "" });
   }
 
@@ -196,7 +171,7 @@ function App() {
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
         onRenderLoading={renderLoading}
-        buttonName={buttonName}
+        isSubmitting={isSubmitting}
       />
 
       <AddPlacePopup
@@ -204,7 +179,7 @@ function App() {
         onClose={closeAllPopups}
         onAddPlace={handleAddPlaceSubmit}
         onRenderLoading={renderLoading}
-        buttonName={buttonName}
+        isSubmitting={isSubmitting}
       />
 
       <DeleteCardPopup
@@ -212,7 +187,7 @@ function App() {
         onClose={closeAllPopups}
         onDeleteCard={handleCardDelete}
         onRenderLoading={renderLoading}
-        buttonName={buttonName}
+        isSubmitting={isSubmitting}
       />
 
       <EditAvatarPopup
@@ -220,7 +195,7 @@ function App() {
         onClose={closeAllPopups}
         onUpdateAvatar={handleUpdateAvatar}
         onRenderLoading={renderLoading}
-        buttonName={buttonName}
+        isSubmitting={isSubmitting}
       />
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />

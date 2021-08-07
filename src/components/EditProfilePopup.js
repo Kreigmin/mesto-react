@@ -18,7 +18,8 @@ function EditProfilePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onRenderLoading("Сохранение...");
+
+    props.onRenderLoading(true);
     props.onUpdateUser({
       name,
       about: description,
@@ -36,7 +37,7 @@ function EditProfilePopup(props) {
       color="dark"
       title="Редактировать профиль"
       marginSize="large"
-      btnName={props.buttonName}
+      btnName={props.isSubmitting ? "Сохранение..." : "Сохранить"}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
