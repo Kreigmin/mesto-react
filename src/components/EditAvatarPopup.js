@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
 function EditAvatarPopup({
@@ -9,6 +9,32 @@ function EditAvatarPopup({
   isSubmitting,
 }) {
   const avatarLinkRef = useRef();
+  const [linkValidation, setLinkValidation] = useState({
+    linkValidationMessage: "",
+    isLinkValid: true,
+  });
+
+  function handleLinkChange() {
+    if (!avatarLinkRef.current.validity.valid) {
+      setLinkValidation({
+        linkValidationMessage: avatarLinkRef.current.validationMessage,
+        isLinkValid: false,
+      });
+    } else {
+      setLinkValidation({
+        linkValidationMessage: "",
+        isLinkValid: true,
+      });
+    }
+  }
+
+  function closePopupAndClearInputsError() {
+    onClose();
+    setLinkValidation({
+      linkValidationMessage: "",
+      isLinkValid: true,
+    });
+  }
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -31,7 +57,7 @@ function EditAvatarPopup({
       marginSize="large"
       btnName={isSubmitting ? "Cохранение..." : "Сохранить"}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={closePopupAndClearInputsError}
       onSubmit={handleSubmit}
     >
       <div className="form__field">
@@ -44,8 +70,15 @@ function EditAvatarPopup({
           placeholder="Ссылка на аватар"
           required
           ref={avatarLinkRef}
+          onChange={handleLinkChange}
         />
-        <span className="form__input-error avatar-link-input-error"></span>
+        <span
+          className={`form__input-error avatar-link-input-error ${
+            !linkValidation.isLinkValid ? "form__input-error_active" : ""
+          }`}
+        >
+          {linkValidation.linkValidationMessage}
+        </span>
       </div>
     </PopupWithForm>
   );

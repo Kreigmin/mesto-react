@@ -11,14 +11,56 @@ function EditProfilePopup({
 }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [nameValidation, setNameValidation] = useState({
+    nameValidationMessage: "",
+    isNameValid: true,
+  });
+  const [descriptionValidation, setDescriptionValidation] = useState({
+    descriptionValidationMessage: "",
+    isDescriptionValid: true,
+  });
   const currentUser = useContext(CurrentUserContext);
 
   function handleNameChange(evt) {
     setName(evt.target.value);
+    if (!evt.target.validity.valid) {
+      setNameValidation({
+        nameValidationMessage: evt.target.validationMessage,
+        isNameValid: false,
+      });
+    } else {
+      setNameValidation({
+        nameValidationMessage: "",
+        isNameValid: true,
+      });
+    }
   }
 
   function handleDescriptionChange(evt) {
     setDescription(evt.target.value);
+    if (!evt.target.validity.valid) {
+      setDescriptionValidation({
+        descriptionValidationMessage: evt.target.validationMessage,
+        isDescriptionValid: false,
+      });
+    } else {
+      setDescriptionValidation({
+        descriptionValidationMessage: "",
+        isDescriptionValid: true,
+      });
+    }
+  }
+
+  function closePopupAndClearInputsError() {
+    onClose();
+    setNameValidation({
+      nameValidationMessage: "",
+      isNameValid: true,
+    });
+    setDescriptionValidation({
+      descriptionValidationMessage: "",
+      isDescriptionValid: true,
+    });
   }
 
   function handleSubmit(evt) {
@@ -44,7 +86,7 @@ function EditProfilePopup({
       marginSize="large"
       btnName={isSubmitting ? "Сохранение..." : "Сохранить"}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={closePopupAndClearInputsError}
       onSubmit={handleSubmit}
     >
       <div className="form__field">
@@ -53,7 +95,7 @@ function EditProfilePopup({
           className="form__input form__input_name_value"
           id="name-input"
           name="profileName"
-          value={name || " "}
+          value={name || ""}
           autoComplete="off"
           placeholder="Имя"
           minLength="2"
@@ -61,7 +103,13 @@ function EditProfilePopup({
           required
           onChange={handleNameChange}
         />
-        <span className="form__input-error name-input-error"></span>
+        <span
+          className={`form__input-error name-input-error ${
+            !nameValidation.isNameValid ? "form__input-error_active" : ""
+          }`}
+        >
+          {nameValidation.nameValidationMessage}
+        </span>
       </div>
       <div className="form__field">
         <input
@@ -75,9 +123,18 @@ function EditProfilePopup({
           minLength="2"
           maxLength="200"
           required
+          noValidate
           onChange={handleDescriptionChange}
         />
-        <span className="form__input-error about-me-input-error"></span>
+        <span
+          className={`form__input-error about-me-input-error ${
+            !descriptionValidation.isDescriptionValid
+              ? "form__input-error_active"
+              : ""
+          }`}
+        >
+          {descriptionValidation.descriptionValidationMessage}
+        </span>
       </div>
     </PopupWithForm>
   );

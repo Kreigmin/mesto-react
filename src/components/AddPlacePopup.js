@@ -10,13 +10,56 @@ function AddPlacePopup({
 }) {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
+  const [nameValidation, setNameValidation] = useState({
+    nameValidationMessage: "",
+    isNameValid: true,
+  });
+  const [linkValidation, setLinkValidation] = useState({
+    linkValidationMessage: "",
+    isLinkValid: true,
+  });
 
   function handleNameChange(evt) {
     setName(evt.target.value);
+    if (!evt.target.validity.valid) {
+      setNameValidation({
+        nameValidationMessage: evt.target.validationMessage,
+        isNameValid: false,
+      });
+    } else {
+      setNameValidation({
+        nameValidationMessage: "",
+        isNameValid: true,
+      });
+    }
   }
 
   function handleLinkChange(evt) {
     setLink(evt.target.value);
+
+    if (!evt.target.validity.valid) {
+      setLinkValidation({
+        linkValidationMessage: evt.target.validationMessage,
+        isLinkValid: false,
+      });
+    } else {
+      setLinkValidation({
+        linkValidationMessage: "",
+        isLinkValid: true,
+      });
+    }
+  }
+
+  function closePopupAndClearInputsError() {
+    onClose();
+    setNameValidation({
+      nameValidationMessage: "",
+      isNameValid: true,
+    });
+    setLinkValidation({
+      linkValidationMessage: "",
+      isLinkValid: true,
+    });
   }
 
   function handleSubmit(evt) {
@@ -42,7 +85,7 @@ function AddPlacePopup({
       marginSize="large"
       btnName={isSubmitting ? "Создание..." : "Создать"}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={closePopupAndClearInputsError}
       onSubmit={handleSubmit}
     >
       <div className="form__field">
@@ -59,7 +102,13 @@ function AddPlacePopup({
           required
           onChange={handleNameChange}
         />
-        <span className="form__input-error card-name-input-error"></span>
+        <span
+          className={`form__input-error card-name-input-error ${
+            !nameValidation.isNameValid ? "form__input-error_active" : ""
+          }`}
+        >
+          {nameValidation.nameValidationMessage}
+        </span>
       </div>
       <div className="form__field">
         <input
@@ -73,7 +122,13 @@ function AddPlacePopup({
           required
           onChange={handleLinkChange}
         />
-        <span className="form__input-error card-link-input-error"></span>
+        <span
+          className={`form__input-error card-link-input-error ${
+            !linkValidation.isLinkValid ? "form__input-error_active" : ""
+          }`}
+        >
+          {linkValidation.linkValidationMessage}
+        </span>
       </div>
     </PopupWithForm>
   );
