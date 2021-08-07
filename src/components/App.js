@@ -26,22 +26,35 @@ function App() {
     setButtonName(buttonName);
   }
 
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   api
+  //     .getUserInfo()
+  //     .then((data) => {
+  //       setCurrentUser(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   api
+  //     .getCards()
+  //     .then((data) => {
+  //       setCards(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   useEffect(() => {
-    api
-      .getCards()
+    Promise.all([api.getCards(), api.getUserInfo()])
       .then((data) => {
-        setCards(data);
+        const initialCards = data[0];
+        const userInfo = data[1];
+        setCards(initialCards);
+        setCurrentUser(userInfo);
       })
       .catch((err) => {
         console.log(err);
